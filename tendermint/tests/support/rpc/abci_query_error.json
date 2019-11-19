@@ -1,0 +1,17 @@
+{
+    "jsonrpc": "2.0",
+    "id": "",
+    "result": {
+        "response": {
+            "code": 1,
+            "log": "account lookup failed: account not found",
+            "info": "",
+            "index": "0",
+            "key": null,
+            "value": null,
+            "proof": null,
+            "height": "0",
+            "codespace": ""
+        }
+    }
+}
