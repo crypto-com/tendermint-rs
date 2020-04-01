@@ -32,6 +32,24 @@ mod endpoints {
                 .response;
 
         assert_eq!(response.height.value(), 1);
+
+        let response =
+            endpoint::abci_query::Response::from_string(&read_json_fixture("abci_query_error"))
+                .unwrap()
+                .response;
+
+        assert_eq!(response.height.value(), 0);
+        assert_eq!(response.code, Code::Err(1));
+
+        let response = endpoint::abci_query::Response::from_string(&read_json_fixture(
+            "abci_query_empty_fields",
+        ))
+        .unwrap()
+        .response;
+
+        assert_eq!(response.height.value(), 0);
+        assert_eq!(response.key, None);
+        assert_eq!(response.proof, None);
     }
 
     #[test]
