@@ -51,13 +51,16 @@ where
         precommits: Option<Precommits>,
     }
 
-    let commit = TmpCommit::deserialize(deserializer)?;
-    if commit.block_id.is_none() || commit.precommits.is_none() {
-        Ok(None)
+    if let Some(commit) = <Option<TmpCommit>>::deserialize(deserializer)? {
+        if commit.block_id.is_none() || commit.precommits.is_none() {
+            Ok(None)
+        } else {
+            Ok(Some(Commit {
+                block_id: commit.block_id.unwrap(),
+                precommits: commit.precommits.unwrap(),
+            }))
+        }
     } else {
-        Ok(Some(Commit {
-            block_id: commit.block_id.unwrap(),
-            precommits: commit.precommits.unwrap(),
-        }))
+        Ok(None)
     }
 }
