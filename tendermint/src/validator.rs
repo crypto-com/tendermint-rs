@@ -183,6 +183,7 @@ pub struct Update {
     pub pub_key: PublicKey,
 
     /// New voting power
+    #[serde(default)]
     pub power: vote::Power,
 }
 
