@@ -82,7 +82,11 @@ fn non_absent_votes(commit: &block::Commit) -> Vec<vote::Vote> {
                     vote_type: vote::Type::Precommit,
                     height: commit.height,
                     round: commit.round,
-                    block_id: Option::from(commit.block_id.clone()),
+                    block_id: if commit_sig.block_id_flag == BlockIDFlag::BlockIDFlagCommit {
+                        Some(commit.block_id.clone())
+                    } else {
+                        None
+                    },
                     timestamp: commit_sig.timestamp,
                     validator_address: val_addr,
                     validator_index: u64::try_from(i)
